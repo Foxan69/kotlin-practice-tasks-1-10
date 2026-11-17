@@ -5,12 +5,13 @@ import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.example.kotlinpractice.ui.theme.KotlinPracticeTheme
+import androidx.compose.material3.MaterialTheme
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
+// Задание 9. UI тесты трекера воды.
 @RunWith(AndroidJUnit4::class)
 class ExampleInstrumentedTest {
     @get:Rule
@@ -18,7 +19,7 @@ class ExampleInstrumentedTest {
 
     @Before
     fun setUp() {
-        composeRule.setContent { KotlinPracticeTheme { WaterTracker() } }
+        composeRule.setContent { MaterialTheme { WaterTracker() } }
     }
 
     @Test
@@ -62,3 +63,4 @@ class ExampleInstrumentedTest {
         composeRule.onNodeWithText("Дней подряд с нормой: 0").assertIsDisplayed()
     }
 }
+

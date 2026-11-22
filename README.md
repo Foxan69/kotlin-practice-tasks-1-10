@@ -716,9 +716,9 @@ fun ContactColumn(modifier: Modifier = Modifier) {
         Text(text = "Имя: Андрей")
         Text(text = "Отчество: Михайлович")
         Text(text = "Фамилия: Лисенков")
-        Text(text = "Мобильный телефон: +7 000 000-00-01")
+        Text(text = "Мобильный телефон: +7 916 504-30-03")
         Text(
-            text = "Адрес: Учебный адрес 1"
+            text = "Адрес: г. Подольск, ул. Новомосковская, д. 67"
         )
     }
 }
@@ -800,22 +800,22 @@ fun ContactListScreen(modifier: Modifier = Modifier) {
             name = "Андрей",
             patronymic = "Михайлович",
             surname = "Лисенков",
-            phone = "+7 000 000-00-01",
-            address = "Учебный адрес 1"
+            phone = "+7 916 504-30-03",
+            address = "г. Подольск, ул. Новомосковская, д. 67"
         ),
         Contact(
             name = "Василий",
             patronymic = "Егорович",
             surname = "Кузякин",
             phone = "—",
-            address = "Учебный адрес 2"
+            address = "Ивановская область, дер. Крутово, д. 4"
         ),
         Contact(
             name = "Людмила",
             patronymic = "Прокофьевна",
             surname = "Калугина",
-            phone = "+7 000 000-00-02",
-            address = "Учебный адрес 3"
+            phone = "+7 495 788 78 78",
+            address = "г. Москва, Большая Никитская, д. 43, кв. 290"
         )
     )
 
@@ -946,11 +946,11 @@ fun ContactRowScreen(modifier: Modifier = Modifier) {
                 ContactLine(text = "Отчество: Михайлович")
                 ContactLine(text = "Фамилия: Лисенков")
                 ContactLine(
-                    text = "Мобильный телефон: +7 000 000-00-01"
+                    text = "Мобильный телефон: +7 916 504-30-03"
                 )
 
                 Text(
-                    text = "Адрес: Учебный адрес 1",
+                    text = "Адрес: г. Подольск, ул. Новомосковская, д. 67",
                     modifier = Modifier.fillMaxWidth(),
                     color = Color.Black,
                     fontSize = 14.sp

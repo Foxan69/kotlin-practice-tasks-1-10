@@ -58,22 +58,22 @@ fun ContactListScreen(modifier: Modifier = Modifier) {
             name = "Андрей",
             patronymic = "Михайлович",
             surname = "Лисенков",
-            phone = "+7 000 000-00-01",
-            address = "Учебный адрес 1"
+            phone = "+7 916 504-30-03",
+            address = "г. Подольск, ул. Новомосковская, д. 67"
         ),
         Contact(
             name = "Василий",
             patronymic = "Егорович",
             surname = "Кузякин",
             phone = "—",
-            address = "Учебный адрес 2"
+            address = "Ивановская область, дер. Крутово, д. 4"
         ),
         Contact(
             name = "Людмила",
             patronymic = "Прокофьевна",
             surname = "Калугина",
-            phone = "+7 000 000-00-02",
-            address = "Учебный адрес 3"
+            phone = "+7 495 788 78 78",
+            address = "г. Москва, Большая Никитская, д. 43, кв. 290"
         )
     )
 

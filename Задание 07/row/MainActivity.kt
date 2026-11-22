@@ -69,11 +69,11 @@ fun ContactRowScreen(modifier: Modifier = Modifier) {
                 ContactLine(text = "Отчество: Михайлович")
                 ContactLine(text = "Фамилия: Лисенков")
                 ContactLine(
-                    text = "Мобильный телефон: +7 000 000-00-01"
+                    text = "Мобильный телефон: +7 916 504-30-03"
                 )
 
                 Text(
-                    text = "Адрес: Учебный адрес 1",
+                    text = "Адрес: г. Подольск, ул. Новомосковская, д. 67",
                     modifier = Modifier.fillMaxWidth(),
                     color = Color.Black,
                     fontSize = 14.sp

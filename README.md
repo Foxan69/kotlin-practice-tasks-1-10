@@ -2,15 +2,6 @@
 
 Лисенков Андрей Михайлович, ИКБО-61-24.
 
-## Запуск в Android Studio
-
-Репозиторий содержит исходники по заданиям. Для запуска используется существующий проект **KotlinPractice** с Jetpack Compose и темой `KotlinPracticeTheme`.
-
-1. Откройте **KotlinPractice** в Android Studio. Скопируйте `MainActivity.kt` выбранного задания в `app/src/main/java/com/example/kotlinpractice/` с заменой файла. Если у задания несколько вариантов, выбирайте один за раз.
-2. Для задания 3 добавьте строку `compose_description` из `strings.xml` в `app/src/main/res/values/strings.xml`. Для задания 6 скопируйте `circle.xml` в `app/src/main/res/drawable/`.
-3. Выберите эмулятор или подключённое устройство и нажмите **▶ Run**.
-4. Для тестов задания 9 используйте его `MainActivity.kt` и поместите `ExampleInstrumentedTest.kt` в `app/src/androidTest/java/com/example/kotlinpractice/`. Запустите класс `ExampleInstrumentedTest` из Android Studio. Настройки тестов модуля приведены в `Задание 09/app/build.gradle.kts`.
-
 ## Задание 1 — Приветствие
 
 [С именем — MainActivity.kt](%D0%97%D0%B0%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5%2001/MainActivity.kt)
@@ -676,8 +667,6 @@ fun CirclePreview() {
 ```
 
 ## Задание 7 — Контакты
-
-В примерах ниже указаны учебные телефоны и адреса. Они отличаются от значений на скриншотах на страницах 8–9 отчёта, чтобы не публиковать исходные контакты. Компоновка экрана та же.
 
 [Один контакт — MainActivity.kt](%D0%97%D0%B0%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5%2007/column/MainActivity.kt)
 

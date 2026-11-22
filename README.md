@@ -1,58 +1,289 @@
-# Практическая работа 2
+# Практическая работа 2 — Kotlin и Jetpack Compose
 
 Лисенков Андрей Михайлович, ИКБО-61-24.
 
-## Задание 1 — Функция приветствия
+## Задание 1 — Приветствие
 
-[Файл с кодом](%D0%97%D0%B0%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5%2001/Hello.kt)
-
-```kotlin
-@Composable
-fun Hello(name: String?, modifier: Modifier = Modifier) {
-    Text(
-        text = if (name == null) "Имя не задано" else "Привет, $name!",
-        modifier = modifier
-    )
-}
-```
-
-## Задание 2 — Настройка предпросмотра
-
-[Файл с кодом](%D0%97%D0%B0%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5%2002/Preview.kt)
+[С именем — MainActivity.kt](%D0%97%D0%B0%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5%2001/MainActivity.kt)
 
 ```kotlin
-@Composable
-fun HelloCentered(name: String?, modifier: Modifier = Modifier) {
-    Box(modifier = modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-        Hello(name)
+package com.example.kotlinpractice
+
+import android.os.Bundle
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
+import com.example.kotlinpractice.ui.theme.KotlinPracticeTheme
+
+class MainActivity : ComponentActivity() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
+
+        setContent {
+            KotlinPracticeTheme {
+                Scaffold(
+                    modifier = Modifier.fillMaxSize()
+                ) { innerPadding ->
+                    Hello(
+                        name = "Андрей",
+                        modifier = Modifier.padding(innerPadding)
+                    )
+                }
+            }
+        }
     }
 }
 
-@Preview(name = "portrait", showBackground = true, showSystemUi = true,
-    widthDp = 360, heightDp = 640)
-@Preview(name = "landscape", showBackground = true, showSystemUi = true,
-    widthDp = 640, heightDp = 360)
-@Preview(name = "round", showBackground = true, backgroundColor = 0xFFFFFF00,
-    device = "spec:shape=Round,width=200,height=200,unit=dp,dpi=160")
+@Composable
+fun Hello(name: String?, modifier: Modifier = Modifier) {
+    Text(
+        text = if (name == null) {
+            "Имя не задано"
+        } else {
+            "Привет, $name!"
+        },
+        modifier = modifier
+    )
+}
+
+@Preview(showBackground = true)
 @Composable
 fun HelloPreview() {
-    MaterialTheme { HelloCentered("Андрей") }
+    KotlinPracticeTheme {
+        Hello("Андрей")
+    }
+}
+```
+
+[Без имени — MainActivity.kt](%D0%97%D0%B0%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5%2001/without-name/MainActivity.kt)
+
+```kotlin
+package com.example.kotlinpractice
+
+import android.os.Bundle
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
+import com.example.kotlinpractice.ui.theme.KotlinPracticeTheme
+
+class MainActivity : ComponentActivity() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
+
+        setContent {
+            KotlinPracticeTheme {
+                Scaffold(
+                    modifier = Modifier.fillMaxSize()
+                ) { innerPadding ->
+                    Hello(
+                        name = null,
+                        modifier = Modifier.padding(innerPadding)
+                    )
+                }
+            }
+        }
+    }
+}
+
+@Composable
+fun Hello(name: String?, modifier: Modifier = Modifier) {
+    Text(
+        text = if (name == null) {
+            "Имя не задано"
+        } else {
+            "Привет, $name!"
+        },
+        modifier = modifier
+    )
+}
+
+@Preview(showBackground = true)
+@Composable
+fun HelloPreview() {
+    KotlinPracticeTheme {
+        Hello(name = null)
+    }
+}
+```
+
+## Задание 2 — Предпросмотр
+
+[MainActivity.kt](%D0%97%D0%B0%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5%2002/MainActivity.kt)
+
+```kotlin
+package com.example.kotlinpractice
+
+import android.os.Bundle
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
+import com.example.kotlinpractice.ui.theme.KotlinPracticeTheme
+
+class MainActivity : ComponentActivity() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
+
+        setContent {
+            KotlinPracticeTheme {
+                Scaffold(
+                    modifier = Modifier.fillMaxSize()
+                ) { innerPadding ->
+                    Hello(
+                        name = "Андрей",
+                        modifier = Modifier.padding(innerPadding)
+                    )
+                }
+            }
+        }
+    }
+}
+
+@Composable
+fun Hello(name: String?, modifier: Modifier = Modifier) {
+    Text(
+        text = if (name == null) {
+            "Имя не задано"
+        } else {
+            "Привет, $name!"
+        },
+        modifier = modifier
+    )
+}
+
+@Preview(
+    name = "portrait",
+    showSystemUi = true,
+    showBackground = true,
+    device = "spec:width=360dp,height=640dp,dpi=160"
+)
+@Preview(
+    name = "landscape",
+    showSystemUi = true,
+    showBackground = true,
+    device = "spec:width=640dp,height=360dp,dpi=160"
+)
+@Preview(
+    name = "round",
+    showSystemUi = true,
+    showBackground = true,
+    backgroundColor = 0xFFFFFF00,
+    device = "spec:width=200dp,height=200dp,dpi=160,isRound=true"
+)
+@Composable
+fun HelloPreview() {
+    KotlinPracticeTheme {
+        Box(
+            modifier = Modifier.fillMaxSize(),
+            contentAlignment = Alignment.Center
+        ) {
+            Hello(name = "Андрей")
+        }
+    }
 }
 ```
 
 ## Задание 3 — Форматирование текста
 
-[Файл с кодом](%D0%97%D0%B0%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5%2003/TextFormatting.kt)
+[MainActivity.kt](%D0%97%D0%B0%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5%2003/MainActivity.kt)
 
 ```kotlin
+package com.example.kotlinpractice
+
+import android.os.Bundle
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextDecoration
+import androidx.compose.ui.text.style.TextIndent
+import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import com.example.kotlinpractice.ui.theme.KotlinPracticeTheme
+
+class MainActivity : ComponentActivity() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
+
+        setContent {
+            KotlinPracticeTheme {
+                Scaffold(
+                    modifier = Modifier.fillMaxSize()
+                ) { innerPadding ->
+                    TextFormattingScreen(
+                        modifier = Modifier.padding(innerPadding)
+                    )
+                }
+            }
+        }
+    }
+}
+
 @Composable
 fun TextFormattingScreen(modifier: Modifier = Modifier) {
     val description = stringResource(R.string.compose_description)
+
     Column(
-        modifier = modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(16.dp),
-        verticalArrangement = Arrangement.spacedBy(20.dp)
+        modifier = modifier
+            .fillMaxSize()
+            .verticalScroll(rememberScrollState())
+            .padding(16.dp),
+        verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
-        Text("Зелёный курсив по центру", style = MaterialTheme.typography.titleMedium)
+        Text(
+            text = "Зелёный курсив по центру",
+            style = MaterialTheme.typography.titleMedium
+        )
+
         Text(
             text = description,
             modifier = Modifier.fillMaxWidth(),
@@ -61,7 +292,12 @@ fun TextFormattingScreen(modifier: Modifier = Modifier) {
             fontStyle = FontStyle.Italic,
             textAlign = TextAlign.Center
         )
-        Text("Одна строка с многоточием", style = MaterialTheme.typography.titleMedium)
+
+        Text(
+            text = "Одна строка с многоточием",
+            style = MaterialTheme.typography.titleMedium
+        )
+
         Text(
             text = description,
             modifier = Modifier.fillMaxWidth(),
@@ -72,22 +308,41 @@ fun TextFormattingScreen(modifier: Modifier = Modifier) {
             maxLines = 1,
             overflow = TextOverflow.Ellipsis
         )
-        Text("Подчёркивание и отступ первой строки", style = MaterialTheme.typography.titleMedium)
+
+        Text(
+            text = "Подчёркивание и отступ первой строки",
+            style = MaterialTheme.typography.titleMedium
+        )
+
         Text(
             text = description,
-            modifier = Modifier.fillMaxWidth().background(Color.Green),
+            modifier = Modifier
+                .fillMaxWidth()
+                .background(Color.Green),
+            color = Color.Black,
+            fontSize = 24.sp,
+            textDecoration = TextDecoration.Underline,
             style = TextStyle(
-                color = Color.Black,
-                fontSize = 24.sp,
-                textDecoration = TextDecoration.Underline,
                 textIndent = TextIndent(firstLine = 48.sp)
             )
         )
     }
 }
+
+@Preview(
+    showBackground = true,
+    widthDp = 360,
+    heightDp = 720
+)
+@Composable
+fun TextFormattingPreview() {
+    KotlinPracticeTheme {
+        TextFormattingScreen()
+    }
+}
 ```
 
-**strings.xml**
+[strings.xml](%D0%97%D0%B0%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5%2003/res/values/strings.xml)
 
 ```xml
 <resources>
@@ -96,88 +351,306 @@ fun TextFormattingScreen(modifier: Modifier = Modifier) {
 </resources>
 ```
 
-## Задание 4 — Оформление кнопки
+## Задание 4 — Кнопка
 
-[Файл с кодом](%D0%97%D0%B0%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5%2004/Button.kt)
+[MainActivity.kt](%D0%97%D0%B0%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5%2004/MainActivity.kt)
 
 ```kotlin
+package com.example.kotlinpractice
+
+import android.os.Bundle
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import com.example.kotlinpractice.ui.theme.KotlinPracticeTheme
+
+class MainActivity : ComponentActivity() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
+
+        setContent {
+            KotlinPracticeTheme {
+                Scaffold(
+                    modifier = Modifier.fillMaxSize()
+                ) { innerPadding ->
+                    ButtonScreen(
+                        modifier = Modifier.padding(innerPadding)
+                    )
+                }
+            }
+        }
+    }
+}
+
 @Composable
 fun ButtonScreen(modifier: Modifier = Modifier) {
-    Box(modifier = modifier.fillMaxSize()) {
+    Box(
+        modifier = modifier.fillMaxSize()
+    ) {
         Button(
             onClick = {},
             modifier = Modifier.fillMaxWidth(),
             shape = RoundedCornerShape(16.dp),
-            border = BorderStroke(2.dp, Color.Gray),
-            elevation = ButtonDefaults.buttonElevation(defaultElevation = 4.dp),
+            border = BorderStroke(
+                width = 2.dp,
+                color = Color.Gray
+            ),
+            elevation = ButtonDefaults.buttonElevation(
+                defaultElevation = 4.dp
+            ),
             colors = ButtonDefaults.buttonColors(
                 containerColor = Color.LightGray,
                 contentColor = Color.Black
             )
         ) {
-            Text("Нажми на меня", fontSize = 18.sp)
+            Text(
+                text = "Нажми на меня",
+                fontSize = 18.sp
+            )
         }
+    }
+}
+
+@Preview(
+    showBackground = true,
+    widthDp = 360,
+    heightDp = 640
+)
+@Composable
+fun ButtonPreview() {
+    KotlinPracticeTheme {
+        ButtonScreen()
     }
 }
 ```
 
 ## Задание 5 — Круг с инициалами
 
-[Файл с кодом](%D0%97%D0%B0%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5%2005/Initials.kt)
+[MainActivity.kt](%D0%97%D0%B0%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5%2005/MainActivity.kt)
 
 ```kotlin
-@Composable
-fun InitialsScreen(modifier: Modifier = Modifier) {
-    Box(modifier = modifier.fillMaxSize()) {
-        Box(
-            modifier = Modifier.fillMaxWidth().height(100.dp)
-                .background(Color.Gray).padding(vertical = 16.dp),
-            contentAlignment = Alignment.Center
-        ) {
-            Box(
-                modifier = Modifier.fillMaxHeight().aspectRatio(1f)
-                    .background(Color(0xFF1565C0), CircleShape),
-                contentAlignment = Alignment.Center
-            ) {
-                Text("ЛАМ", color = Color.White, fontSize = 20.sp, fontWeight = FontWeight.Bold)
+package com.example.kotlinpractice
+
+import android.os.Bundle
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import com.example.kotlinpractice.ui.theme.KotlinPracticeTheme
+
+class MainActivity : ComponentActivity() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
+
+        setContent {
+            KotlinPracticeTheme {
+                Scaffold(
+                    modifier = Modifier.fillMaxSize()
+                ) { innerPadding ->
+                    InitialsScreen(
+                        modifier = Modifier.padding(innerPadding)
+                    )
+                }
             }
         }
     }
 }
-```
 
-## Задание 6 — Вывод изображения
-
-[Файл с кодом](%D0%97%D0%B0%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5%2006/Image.kt)
-
-```kotlin
 @Composable
-fun ImageScreen(modifier: Modifier = Modifier) {
-    Column(
-        modifier = modifier.fillMaxSize().padding(16.dp),
-        verticalArrangement = Arrangement.spacedBy(16.dp)
+fun InitialsScreen(modifier: Modifier = Modifier) {
+    Box(
+        modifier = modifier.fillMaxSize()
     ) {
-        Text("Исходный круг справа сверху")
-        Box(modifier = Modifier.size(240.dp, 120.dp).background(Color.Black)) {
-            Image(
-                painter = painterResource(R.drawable.circle),
-                contentDescription = "Оранжевый круг",
-                modifier = Modifier.size(48.dp).align(Alignment.TopEnd)
-            )
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(100.dp)
+                .background(Color.Gray)
+                .padding(vertical = 16.dp),
+            contentAlignment = Alignment.Center
+        ) {
+            Box(
+                modifier = Modifier
+                    .fillMaxHeight()
+                    .aspectRatio(1f)
+                    .background(
+                        color = Color(0xFF1565C0),
+                        shape = CircleShape
+                    ),
+                contentAlignment = Alignment.Center
+            ) {
+                Text(
+                    text = "ЛАМ",
+                    color = Color.White,
+                    fontSize = 20.sp,
+                    fontWeight = FontWeight.Bold
+                )
+            }
         }
-        Text("Растянутый круг с изменённым цветом")
-        Image(
-            painter = painterResource(R.drawable.circle),
-            contentDescription = "Фиолетовый растянутый круг",
-            modifier = Modifier.size(240.dp, 120.dp).background(Color.Blue),
-            contentScale = ContentScale.FillBounds,
-            colorFilter = ColorFilter.tint(Color(0xFF800080))
-        )
+    }
+}
+
+@Preview(
+    showBackground = true,
+    widthDp = 360,
+    heightDp = 640
+)
+@Composable
+fun InitialsPreview() {
+    KotlinPracticeTheme {
+        InitialsScreen()
     }
 }
 ```
 
-**circle.xml**
+## Задание 6 — Векторное изображение
+
+[MainActivity.kt](%D0%97%D0%B0%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5%2006/MainActivity.kt)
+
+```kotlin
+package com.example.kotlinpractice
+
+import android.os.Bundle
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import com.example.kotlinpractice.ui.theme.KotlinPracticeTheme
+
+class MainActivity : ComponentActivity() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
+
+        setContent {
+            KotlinPracticeTheme {
+                Scaffold(
+                    modifier = Modifier.fillMaxSize()
+                ) { innerPadding ->
+                    CircleScreen(
+                        modifier = Modifier.padding(innerPadding)
+                    )
+                }
+            }
+        }
+    }
+}
+
+@Composable
+fun CircleScreen(modifier: Modifier = Modifier) {
+    Column(
+        modifier = modifier
+            .fillMaxSize()
+            .padding(16.dp),
+        verticalArrangement = Arrangement.spacedBy(16.dp)
+    ) {
+        Text(text = "Исходный круг справа сверху")
+
+        OriginalCircle()
+
+        Text(text = "Растянутый круг с изменённым цветом")
+
+        StretchedCircle()
+    }
+}
+
+@Composable
+fun OriginalCircle() {
+    Image(
+        painter = painterResource(R.drawable.circle),
+        contentDescription = "Оранжевый круг справа сверху",
+        modifier = Modifier
+            .size(width = 240.dp, height = 120.dp)
+            .background(Color.Black),
+        contentScale = ContentScale.None,
+        alignment = Alignment.TopEnd
+    )
+}
+
+@Composable
+fun StretchedCircle() {
+    Image(
+        painter = painterResource(R.drawable.circle),
+        contentDescription = "Фиолетовый круг, растянутый по контейнеру",
+        modifier = Modifier
+            .size(width = 240.dp, height = 120.dp)
+            .background(Color.Blue),
+        contentScale = ContentScale.FillBounds,
+        alignment = Alignment.Center,
+        colorFilter = ColorFilter.tint(Color(0xFF800080))
+    )
+}
+
+@Preview(
+    showBackground = true,
+    widthDp = 360,
+    heightDp = 640
+)
+@Composable
+fun CirclePreview() {
+    KotlinPracticeTheme {
+        CircleScreen()
+    }
+}
+```
+
+[circle.xml](%D0%97%D0%B0%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5%2006/res/drawable/circle.xml)
 
 ```xml
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
@@ -185,18 +658,112 @@ fun ImageScreen(modifier: Modifier = Modifier) {
     android:height="48dp"
     android:viewportWidth="24"
     android:viewportHeight="24">
+
     <path
         android:fillColor="#FF5722"
         android:pathData="M12,2a10,10 0,1,1 0,20a10,10 0,1,1 0,-20" />
+
 </vector>
 ```
 
-## Задание 7 — Контакты и компоновки Column и Row
+## Задание 7 — Контакты
 
-[Файл с кодом](%D0%97%D0%B0%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5%2007/Contacts.kt)
+[Один контакт — MainActivity.kt](%D0%97%D0%B0%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5%2007/column/MainActivity.kt)
 
 ```kotlin
-private const val CONTACT_MODE = 3
+package com.example.kotlinpractice
+
+import android.os.Bundle
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
+import com.example.kotlinpractice.ui.theme.KotlinPracticeTheme
+
+class MainActivity : ComponentActivity() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
+
+        setContent {
+            KotlinPracticeTheme {
+                Scaffold(
+                    modifier = Modifier.fillMaxSize()
+                ) { innerPadding ->
+                    ContactColumn(
+                        modifier = Modifier.padding(innerPadding)
+                    )
+                }
+            }
+        }
+    }
+}
+
+@Composable
+fun ContactColumn(modifier: Modifier = Modifier) {
+    Column(
+        modifier = modifier.fillMaxWidth()
+    ) {
+        Text(text = "Имя: Андрей")
+        Text(text = "Отчество: Михайлович")
+        Text(text = "Фамилия: Лисенков")
+        Text(text = "Мобильный телефон: +7 000 000-00-01")
+        Text(
+            text = "Адрес: Учебный адрес 1"
+        )
+    }
+}
+
+@Preview(
+    showBackground = true,
+    showSystemUi = true,
+    widthDp = 360,
+    heightDp = 640
+)
+@Composable
+fun ContactColumnPreview() {
+    KotlinPracticeTheme {
+        ContactColumn()
+    }
+}
+```
+
+[Список контактов — MainActivity.kt](%D0%97%D0%B0%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5%2007/list/MainActivity.kt)
+
+```kotlin
+package com.example.kotlinpractice
+
+import android.os.Bundle
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import com.example.kotlinpractice.ui.theme.KotlinPracticeTheme
 
 data class Contact(
     val name: String,
@@ -206,216 +773,970 @@ data class Contact(
     val address: String
 )
 
-private val contacts = listOf(
-    Contact("Андрей", "Михайлович", "Лисенков", "+7 000 000-00-01",
-        "Учебный адрес 1"),
-    Contact("Василий", "Егорович", "Кузякин", "—",
-        "Учебный адрес 2"),
-    Contact("Людмила", "Прокофьевна", "Калугина", "+7 000 000-00-02",
-        "Учебный адрес 3")
-)
+class MainActivity : ComponentActivity() {
 
-@Composable
-fun ContactScreen(modifier: Modifier = Modifier) {
-    when (CONTACT_MODE) {
-        1 -> ContactColumn(contacts.first(), modifier)
-        2 -> ContactListScreen(modifier)
-        3 -> ContactRowScreen(modifier)
-    }
-}
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
 
-@Composable
-fun ContactColumn(contact: Contact, modifier: Modifier = Modifier) {
-    Column(modifier = modifier.fillMaxWidth()) {
-        Text("Имя: ${contact.name}")
-        Text("Отчество: ${contact.patronymic}")
-        Text("Фамилия: ${contact.surname}")
-        Text("Мобильный телефон: ${contact.phone}")
-        Text("Адрес: ${contact.address}")
-    }
-}
-
-@Composable
-fun ContactLines(contact: Contact) {
-    val lines = listOf(
-        "Имя: ${contact.name}", "Отчество: ${contact.patronymic}",
-        "Фамилия: ${contact.surname}", "Мобильный телефон: ${contact.phone}",
-        "Адрес: ${contact.address}"
-    )
-    lines.forEach { line ->
-        Text(line, modifier = Modifier.fillMaxWidth(), color = Color.Black,
-            fontSize = 14.sp, textAlign = TextAlign.Center)
+        setContent {
+            KotlinPracticeTheme {
+                Scaffold(
+                    modifier = Modifier.fillMaxSize()
+                ) { innerPadding ->
+                    ContactListScreen(
+                        modifier = Modifier.padding(innerPadding)
+                    )
+                }
+            }
+        }
     }
 }
 
 @Composable
 fun ContactListScreen(modifier: Modifier = Modifier) {
+    val contacts = listOf(
+        Contact(
+            name = "Андрей",
+            patronymic = "Михайлович",
+            surname = "Лисенков",
+            phone = "+7 000 000-00-01",
+            address = "Учебный адрес 1"
+        ),
+        Contact(
+            name = "Василий",
+            patronymic = "Егорович",
+            surname = "Кузякин",
+            phone = "—",
+            address = "Учебный адрес 2"
+        ),
+        Contact(
+            name = "Людмила",
+            patronymic = "Прокофьевна",
+            surname = "Калугина",
+            phone = "+7 000 000-00-02",
+            address = "Учебный адрес 3"
+        )
+    )
+
     Column(
-        modifier = modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(8.dp),
+        modifier = modifier
+            .fillMaxSize()
+            .verticalScroll(rememberScrollState())
+            .padding(8.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
         contacts.forEach { contact ->
-            Column(
-                modifier = Modifier.fillMaxWidth().background(Color.LightGray).padding(8.dp),
-                verticalArrangement = Arrangement.spacedBy(4.dp)
-            ) { ContactLines(contact) }
+            ContactCard(contact = contact)
+        }
+    }
+}
+
+@Composable
+fun ContactCard(contact: Contact) {
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .background(Color.LightGray)
+            .padding(8.dp)
+    ) {
+        ContactLine(text = "Имя: ${contact.name}")
+        ContactLine(text = "Отчество: ${contact.patronymic}")
+        ContactLine(text = "Фамилия: ${contact.surname}")
+        ContactLine(text = "Мобильный телефон: ${contact.phone}")
+        ContactLine(text = "Адрес: ${contact.address}")
+    }
+}
+
+@Composable
+fun ContactLine(text: String) {
+    Text(
+        text = text,
+        modifier = Modifier.fillMaxWidth(),
+        color = Color.Black,
+        fontSize = 14.sp,
+        textAlign = TextAlign.Center
+    )
+}
+
+@Preview(
+    showBackground = true,
+    widthDp = 360,
+    heightDp = 640
+)
+@Composable
+fun ContactListPreview() {
+    KotlinPracticeTheme {
+        ContactListScreen()
+    }
+}
+```
+
+[Контакт со звездой — MainActivity.kt](%D0%97%D0%B0%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5%2007/row/MainActivity.kt)
+
+```kotlin
+package com.example.kotlinpractice
+
+import android.os.Bundle
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import com.example.kotlinpractice.ui.theme.KotlinPracticeTheme
+
+class MainActivity : ComponentActivity() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
+
+        setContent {
+            KotlinPracticeTheme {
+                Scaffold(
+                    modifier = Modifier.fillMaxSize()
+                ) { innerPadding ->
+                    ContactRowScreen(
+                        modifier = Modifier.padding(innerPadding)
+                    )
+                }
+            }
         }
     }
 }
 
 @Composable
 fun ContactRowScreen(modifier: Modifier = Modifier) {
-    Row(
-        modifier = modifier.fillMaxWidth().padding(8.dp)
-            .background(Color.LightGray).padding(8.dp),
-        verticalAlignment = Alignment.CenterVertically
+    Box(
+        modifier = modifier
+            .fillMaxSize()
+            .padding(8.dp)
     ) {
-        Column(modifier = Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(4.dp)) {
-            ContactLines(contacts.first())
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .background(Color.LightGray)
+                .padding(8.dp),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(8.dp)
+        ) {
+            Column(
+                modifier = Modifier.weight(1f)
+            ) {
+                ContactLine(text = "Имя: Андрей")
+                ContactLine(text = "Отчество: Михайлович")
+                ContactLine(text = "Фамилия: Лисенков")
+                ContactLine(
+                    text = "Мобильный телефон: +7 000 000-00-01"
+                )
+
+                Text(
+                    text = "Адрес: Учебный адрес 1",
+                    modifier = Modifier.fillMaxWidth(),
+                    color = Color.Black,
+                    fontSize = 14.sp
+                )
+            }
+
+            Image(
+                painter = painterResource(
+                    android.R.drawable.star_big_on
+                ),
+                contentDescription = "Избранный контакт",
+                modifier = Modifier.size(24.dp)
+            )
         }
-        Image(
-            painter = painterResource(android.R.drawable.star_big_on),
-            contentDescription = "Избранный контакт",
-            modifier = Modifier.size(24.dp)
-        )
+    }
+}
+
+@Composable
+fun ContactLine(text: String) {
+    Text(
+        text = text,
+        modifier = Modifier.fillMaxWidth(),
+        color = Color.Black,
+        fontSize = 14.sp,
+        textAlign = TextAlign.Center
+    )
+}
+
+@Preview(
+    showBackground = true,
+    widthDp = 360,
+    heightDp = 640
+)
+@Composable
+fun ContactRowPreview() {
+    KotlinPracticeTheme {
+        ContactRowScreen()
     }
 }
 ```
 
 ## Задание 8 — Трекер воды
 
-[Файл с кодом](%D0%97%D0%B0%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5%2008/WaterTracker.kt)
+[MainActivity.kt](%D0%97%D0%B0%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5%2008/MainActivity.kt)
 
 ```kotlin
+package com.example.kotlinpractice
+
+import android.os.Bundle
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.OutlinedButton
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import com.example.kotlinpractice.ui.theme.KotlinPracticeTheme
+
+class MainActivity : ComponentActivity() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
+
+        setContent {
+            KotlinPracticeTheme {
+                Scaffold(
+                    modifier = Modifier.fillMaxSize()
+                ) { innerPadding ->
+                    WaterTracker(
+                        modifier = Modifier.padding(innerPadding)
+                    )
+                }
+            }
+        }
+    }
+}
+
 @Composable
 fun WaterTracker(modifier: Modifier = Modifier) {
-    var waterCount by rememberSaveable { mutableIntStateOf(100) }
-    var streakDays by rememberSaveable { mutableIntStateOf(0) }
+    var waterCount by rememberSaveable {
+        mutableIntStateOf(100)
+    }
+
+    var streakDays by rememberSaveable {
+        mutableIntStateOf(0)
+    }
+
     val primaryColor = Color(0xFF435F91)
     val secondaryColor = Color(0xFF586174)
+
     Column(
-        modifier = modifier.fillMaxSize().padding(16.dp),
+        modifier = modifier
+            .fillMaxSize()
+            .padding(16.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
+        verticalArrangement =
+            androidx.compose.foundation.layout.Arrangement.Center
     ) {
-        Text("Трекер воды", fontSize = 32.sp, fontWeight = FontWeight.Bold, color = primaryColor)
-        Spacer(Modifier.height(48.dp))
-        Text("$waterCount мл", fontSize = 48.sp, fontWeight = FontWeight.Bold, color = secondaryColor)
-        Spacer(Modifier.height(24.dp))
+        Text(
+            text = "Трекер воды",
+            fontSize = 32.sp,
+            fontWeight = FontWeight.Bold,
+            color = primaryColor
+        )
+
+        Spacer(modifier = Modifier.height(48.dp))
+
+        Text(
+            text = "$waterCount мл",
+            fontSize = 48.sp,
+            fontWeight = FontWeight.Bold,
+            color = secondaryColor
+        )
+
+        Spacer(modifier = Modifier.height(24.dp))
+
         Button(
-            onClick = { waterCount += 250 },
-            colors = ButtonDefaults.buttonColors(containerColor = primaryColor, contentColor = Color.White)
-        ) { Text("+250 мл", fontSize = 18.sp, fontWeight = FontWeight.Bold) }
-        Spacer(Modifier.height(16.dp))
-        OutlinedButton(onClick = {
-            streakDays = if (waterCount >= 1500) streakDays + 1 else 0
-            waterCount = 0
-        }) { Text("Завершить день", fontSize = 18.sp) }
-        Spacer(Modifier.height(24.dp))
-        Text("Дней подряд с нормой: $streakDays", fontSize = 18.sp, color = secondaryColor)
+            onClick = {
+                waterCount += 250
+            },
+            colors = ButtonDefaults.buttonColors(
+                containerColor = primaryColor,
+                contentColor = Color.White
+            )
+        ) {
+            Text(
+                text = "+250 мл",
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold
+            )
+        }
+
+        Spacer(modifier = Modifier.height(16.dp))
+
+        OutlinedButton(
+            onClick = {
+                if (waterCount >= 1500) {
+                    streakDays += 1
+                } else {
+                    streakDays = 0
+                }
+
+                waterCount = 0
+            }
+        ) {
+            Text(
+                text = "Завершить день",
+                fontSize = 18.sp
+            )
+        }
+
+        Spacer(modifier = Modifier.height(24.dp))
+
+        Text(
+            text = "Дней подряд с нормой: $streakDays",
+            fontSize = 18.sp,
+            color = secondaryColor
+        )
+    }
+}
+
+@Preview(
+    showBackground = true,
+    widthDp = 360,
+    heightDp = 640
+)
+@Composable
+fun WaterTrackerPreview() {
+    KotlinPracticeTheme {
+        WaterTracker()
     }
 }
 ```
 
-## Задание 9 — UI тесты трекера воды
+## Задание 9 — UI-тесты трекера воды
 
-[Файл с кодом](%D0%97%D0%B0%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5%2009/WaterTrackerTest.kt)
+[MainActivity.kt](%D0%97%D0%B0%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5%2009/MainActivity.kt)
 
 ```kotlin
+package com.example.kotlinpractice
+
+import android.os.Bundle
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.OutlinedButton
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import com.example.kotlinpractice.ui.theme.KotlinPracticeTheme
+
+class MainActivity : ComponentActivity() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
+
+        setContent {
+            KotlinPracticeTheme {
+                Scaffold(
+                    modifier = Modifier.fillMaxSize()
+                ) { innerPadding ->
+                    WaterTracker(
+                        modifier = Modifier.padding(innerPadding)
+                    )
+                }
+            }
+        }
+    }
+}
+
+@Composable
+fun WaterTracker(modifier: Modifier = Modifier) {
+    var waterCount by rememberSaveable {
+        mutableIntStateOf(100)
+    }
+    var streakDays by rememberSaveable {
+        mutableIntStateOf(0)
+    }
+
+    val primaryColor = Color(0xFF435F91)
+    val secondaryColor = Color(0xFF586174)
+
+    Column(
+        modifier = modifier
+            .fillMaxSize()
+            .padding(16.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
+    ) {
+        Text(
+            text = "Трекер воды",
+            fontSize = 32.sp,
+            fontWeight = FontWeight.Bold,
+            color = primaryColor
+        )
+
+        Spacer(modifier = Modifier.height(48.dp))
+
+        Text(
+            text = "$waterCount мл",
+            fontSize = 48.sp,
+            fontWeight = FontWeight.Bold,
+            color = secondaryColor
+        )
+
+        Spacer(modifier = Modifier.height(24.dp))
+
+        Button(
+            onClick = {
+                waterCount += 250
+            },
+            colors = ButtonDefaults.buttonColors(
+                containerColor = primaryColor,
+                contentColor = Color.White
+            )
+        ) {
+            Text(
+                text = "+250 мл",
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold
+            )
+        }
+
+        Spacer(modifier = Modifier.height(16.dp))
+
+        OutlinedButton(
+            onClick = {
+                streakDays = if (waterCount >= 1500) {
+                    streakDays + 1
+                } else {
+                    0
+                }
+                waterCount = 0
+            }
+        ) {
+            Text(
+                text = "Завершить день",
+                fontSize = 18.sp
+            )
+        }
+
+        Spacer(modifier = Modifier.height(24.dp))
+
+        Text(
+            text = "Дней подряд с нормой: $streakDays",
+            fontSize = 18.sp,
+            color = secondaryColor
+        )
+    }
+}
+
+@Preview(
+    showBackground = true,
+    widthDp = 360,
+    heightDp = 640
+)
+@Composable
+fun WaterTrackerPreview() {
+    KotlinPracticeTheme {
+        WaterTracker()
+    }
+}
+```
+
+[Четыре UI-теста — ExampleInstrumentedTest.kt](%D0%97%D0%B0%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5%2009/androidTest/ExampleInstrumentedTest.kt)
+
+```kotlin
+package com.example.kotlinpractice
+
+import androidx.compose.ui.test.assertIsDisplayed
+import androidx.compose.ui.test.junit4.createComposeRule
+import androidx.compose.ui.test.onNodeWithText
+import androidx.compose.ui.test.performClick
+import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.example.kotlinpractice.ui.theme.KotlinPracticeTheme
+import org.junit.Before
+import org.junit.Rule
+import org.junit.Test
+import org.junit.runner.RunWith
+
 @RunWith(AndroidJUnit4::class)
 class ExampleInstrumentedTest {
+
     @get:Rule
     val composeRule = createComposeRule()
 
     @Before
     fun setUp() {
-        composeRule.setContent { MaterialTheme { WaterTracker() } }
+        composeRule.setContent {
+            KotlinPracticeTheme {
+                WaterTracker()
+            }
+        }
     }
 
     @Test
     fun buttonsAndDayCounterAreVisible() {
-        composeRule.onNodeWithText("+250 мл").assertIsDisplayed()
-        composeRule.onNodeWithText("Завершить день").assertIsDisplayed()
-        composeRule.onNodeWithText("100 мл").assertIsDisplayed()
-        composeRule.onNodeWithText("Дней подряд с нормой: 0").assertIsDisplayed()
+        composeRule.onNodeWithText("+250 мл")
+            .assertIsDisplayed()
+
+        composeRule.onNodeWithText("Завершить день")
+            .assertIsDisplayed()
+
+        composeRule.onNodeWithText("100 мл")
+            .assertIsDisplayed()
+
+        composeRule.onNodeWithText("Дней подряд с нормой: 0")
+            .assertIsDisplayed()
     }
 
     @Test
     fun addButtonAdds250EachTime() {
-        composeRule.onNodeWithText("+250 мл").performClick()
-        composeRule.onNodeWithText("350 мл").assertIsDisplayed()
-        composeRule.onNodeWithText("+250 мл").performClick()
-        composeRule.onNodeWithText("600 мл").assertIsDisplayed()
+        addWater(times = 1)
+
+        composeRule.onNodeWithText("350 мл")
+            .assertIsDisplayed()
+
+        addWater(times = 1)
+
+        composeRule.onNodeWithText("600 мл")
+            .assertIsDisplayed()
     }
 
     @Test
     fun finishDayCountsConsecutiveSuccessfulDays() {
-        repeat(6) { composeRule.onNodeWithText("+250 мл").performClick() }
-        composeRule.onNodeWithText("1600 мл").assertIsDisplayed()
-        composeRule.onNodeWithText("Завершить день").performClick()
-        composeRule.onNodeWithText("0 мл").assertIsDisplayed()
-        composeRule.onNodeWithText("Дней подряд с нормой: 1").assertIsDisplayed()
-        repeat(6) { composeRule.onNodeWithText("+250 мл").performClick() }
-        composeRule.onNodeWithText("1500 мл").assertIsDisplayed()
-        composeRule.onNodeWithText("Завершить день").performClick()
-        composeRule.onNodeWithText("Дней подряд с нормой: 2").assertIsDisplayed()
+        addWater(times = 6)
+
+        composeRule.onNodeWithText("1600 мл")
+            .assertIsDisplayed()
+
+        finishDay()
+
+        composeRule.onNodeWithText("0 мл")
+            .assertIsDisplayed()
+
+        composeRule.onNodeWithText("Дней подряд с нормой: 1")
+            .assertIsDisplayed()
+
+        addWater(times = 6)
+
+        composeRule.onNodeWithText("1500 мл")
+            .assertIsDisplayed()
+
+        finishDay()
+
+        composeRule.onNodeWithText("0 мл")
+            .assertIsDisplayed()
+
+        composeRule.onNodeWithText("Дней подряд с нормой: 2")
+            .assertIsDisplayed()
     }
 
     @Test
     fun finishDayBelowGoalResetsStreak() {
-        repeat(6) { composeRule.onNodeWithText("+250 мл").performClick() }
-        composeRule.onNodeWithText("Завершить день").performClick()
-        composeRule.onNodeWithText("Дней подряд с нормой: 1").assertIsDisplayed()
-        repeat(4) { composeRule.onNodeWithText("+250 мл").performClick() }
-        composeRule.onNodeWithText("1000 мл").assertIsDisplayed()
-        composeRule.onNodeWithText("Завершить день").performClick()
-        composeRule.onNodeWithText("0 мл").assertIsDisplayed()
-        composeRule.onNodeWithText("Дней подряд с нормой: 0").assertIsDisplayed()
+        addWater(times = 6)
+        finishDay()
+
+        composeRule.onNodeWithText("Дней подряд с нормой: 1")
+            .assertIsDisplayed()
+
+        addWater(times = 5)
+
+        composeRule.onNodeWithText("1250 мл")
+            .assertIsDisplayed()
+
+        finishDay()
+
+        composeRule.onNodeWithText("0 мл")
+            .assertIsDisplayed()
+
+        composeRule.onNodeWithText("Дней подряд с нормой: 0")
+            .assertIsDisplayed()
+    }
+
+    private fun addWater(times: Int) {
+        repeat(times) {
+            composeRule.onNodeWithText("+250 мл")
+                .performClick()
+        }
+    }
+
+    private fun finishDay() {
+        composeRule.onNodeWithText("Завершить день")
+            .performClick()
+    }
+}
+```
+
+[Настройки модуля — build.gradle.kts](%D0%97%D0%B0%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5%2009/app/build.gradle.kts)
+
+```kotlin
+plugins {
+    alias(libs.plugins.android.application)
+    alias(libs.plugins.kotlin.compose)
+}
+
+android {
+    namespace = "com.example.kotlinpractice"
+
+    compileSdk {
+        version = release(37)
+    }
+
+    defaultConfig {
+        applicationId = "com.example.kotlinpractice"
+        minSdk = 24
+        targetSdk = 37
+        versionCode = 1
+        versionName = "1.0"
+
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            optimization {
+                enable = true
+                packageScope = setOf(
+                    "androidx.**",
+                    "kotlin.**",
+                    "kotlinx.**"
+                )
+            }
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
+    }
+
+    buildFeatures {
+        compose = true
     }
 }
 
+dependencies {
+    implementation(platform(libs.androidx.compose.bom))
+    implementation(libs.androidx.activity.compose)
+    implementation(libs.androidx.compose.material3)
+    implementation(libs.androidx.compose.ui)
+    implementation(libs.androidx.compose.ui.graphics)
+    implementation(libs.androidx.compose.ui.tooling.preview)
+    implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.lifecycle.runtime.ktx)
+
+    testImplementation(libs.junit)
+
+    androidTestImplementation(platform(libs.androidx.compose.bom))
+    androidTestImplementation(libs.androidx.compose.ui.test.junit4)
+    androidTestImplementation("androidx.test.espresso:espresso-core:3.7.0")
+    androidTestImplementation(libs.androidx.junit)
+
+    debugImplementation(libs.androidx.compose.ui.test.manifest)
+    debugImplementation(libs.androidx.compose.ui.tooling)
+}
 ```
 
-## Задание 10 — Корзина товаров
+## Задание 10 — Корзина
 
-[Файл с кодом](%D0%97%D0%B0%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5%2010/Cart.kt)
+[MainActivity.kt](%D0%97%D0%B0%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5%2010/MainActivity.kt)
 
 ```kotlin
-data class Product(val id: Int, val name: String, val price: Int)
+package com.example.kotlinpractice
+
+import android.os.Bundle
+import android.widget.Toast
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.OutlinedButton
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import com.example.kotlinpractice.ui.theme.KotlinPracticeTheme
+import kotlin.random.Random
+
+data class Product(
+    val id: Int,
+    val name: String,
+    val price: Int
+)
+
+class MainActivity : ComponentActivity() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
+
+        setContent {
+            KotlinPracticeTheme {
+                Scaffold(
+                    modifier = Modifier.fillMaxSize()
+                ) { innerPadding ->
+                    ShoppingCartScreen(
+                        modifier = Modifier.padding(innerPadding)
+                    )
+                }
+            }
+        }
+    }
+}
 
 @Composable
-fun CartScreen(modifier: Modifier = Modifier) {
+fun ShoppingCartScreen(modifier: Modifier = Modifier) {
     val context = LocalContext.current
-    var prices by rememberSaveable { mutableStateOf(listOf(100, 150, 56)) }
-    val products = prices.mapIndexed { index, price -> Product(index + 1, "Товар #${index + 1}", price) }
-    val total = products.sumOf { it.price }
+
+    var products by remember {
+        mutableStateOf(
+            listOf(
+                Product(0, "Товар #1", 100),
+                Product(1, "Товар #2", 150),
+                Product(2, "Товар #3", 56)
+            )
+        )
+    }
+
+    var nextProductId by remember {
+        mutableIntStateOf(3)
+    }
+
+    val totalSum = products.sumOf { it.price }
+
     Column(
-        modifier = modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(16.dp),
+        modifier = modifier
+            .fillMaxSize()
+            .verticalScroll(rememberScrollState())
+            .padding(16.dp),
         verticalArrangement = Arrangement.spacedBy(12.dp)
     ) {
-        Text("Корзина", fontSize = 28.sp, fontWeight = FontWeight.Bold)
-        if (products.isEmpty()) Text("Корзина пуста", fontSize = 16.sp)
-        products.forEach { product ->
-            Text("${product.name} — ${product.price} рублей", fontSize = 18.sp)
+        Text(
+            text = "Корзина",
+            fontSize = 28.sp,
+            fontWeight = FontWeight.Bold
+        )
+
+        if (products.isEmpty()) {
+            Text(text = "Корзина пуста")
         }
-        Text("Товаров на сумму: $total рублей", fontSize = 20.sp, fontWeight = FontWeight.Bold)
+
+        products.forEach { product ->
+            Text(
+                text = "${product.name} — ${product.price} рублей",
+                fontSize = 18.sp
+            )
+        }
+
+        Text(
+            text = "Товаров на сумму: $totalSum рублей",
+            fontSize = 20.sp,
+            fontWeight = FontWeight.Bold
+        )
+
         Button(
             modifier = Modifier.fillMaxWidth(),
             onClick = {
-                val updatedPrices = prices + Random.nextInt(1, 101)
-                prices = updatedPrices
-                if (updatedPrices.sum() > 500) {
-                    Toast.makeText(context, "Доставка бесплатная!", Toast.LENGTH_SHORT).show()
+                val newProduct = Product(
+                    id = nextProductId,
+                    name = "Товар #${nextProductId + 1}",
+                    price = Random.nextInt(0, 100)
+                )
+
+                val updatedProducts = products + newProduct
+
+                products = updatedProducts
+                nextProductId += 1
+
+                if (updatedProducts.sumOf { it.price } > 500) {
+                    Toast.makeText(
+                        context,
+                        "Доставка бесплатная!",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             }
-        ) { Text("Добавить товар") }
+        ) {
+            Text(text = "Добавить товар")
+        }
+
         if (products.isNotEmpty()) {
             OutlinedButton(
                 modifier = Modifier.fillMaxWidth(),
-                onClick = { prices = prices.dropLast(1) }
-            ) { Text("Удалить товар") }
+                onClick = {
+                    products = products.dropLast(1)
+                }
+            ) {
+                Text(text = "Удалить товар")
+            }
         }
     }
 }
-```
 
+@Composable
+fun WaterTracker(modifier: Modifier = Modifier) {
+    var waterCount by rememberSaveable {
+        mutableIntStateOf(100)
+    }
+    var streakDays by rememberSaveable {
+        mutableIntStateOf(0)
+    }
+
+    val primaryColor = Color(0xFF435F91)
+    val secondaryColor = Color(0xFF586174)
+
+    Column(
+        modifier = modifier
+            .fillMaxSize()
+            .padding(16.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
+    ) {
+        Text(
+            text = "Трекер воды",
+            fontSize = 32.sp,
+            fontWeight = FontWeight.Bold,
+            color = primaryColor
+        )
+
+        Spacer(modifier = Modifier.height(48.dp))
+
+        Text(
+            text = "$waterCount мл",
+            fontSize = 48.sp,
+            fontWeight = FontWeight.Bold,
+            color = secondaryColor
+        )
+
+        Spacer(modifier = Modifier.height(24.dp))
+
+        Button(
+            onClick = {
+                waterCount += 250
+            },
+            colors = ButtonDefaults.buttonColors(
+                containerColor = primaryColor,
+                contentColor = Color.White
+            )
+        ) {
+            Text(
+                text = "+250 мл",
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold
+            )
+        }
+
+        Spacer(modifier = Modifier.height(16.dp))
+
+        OutlinedButton(
+            onClick = {
+                streakDays = if (waterCount >= 1500) {
+                    streakDays + 1
+                } else {
+                    0
+                }
+                waterCount = 0
+            }
+        ) {
+            Text(
+                text = "Завершить день",
+                fontSize = 18.sp
+            )
+        }
+
+        Spacer(modifier = Modifier.height(24.dp))
+
+        Text(
+            text = "Дней подряд с нормой: $streakDays",
+            fontSize = 18.sp,
+            color = secondaryColor
+        )
+    }
+}
+
+@Preview(
+    showBackground = true,
+    widthDp = 360,
+    heightDp = 640
+)
+@Composable
+fun ShoppingCartPreview() {
+    KotlinPracticeTheme {
+        ShoppingCartScreen()
+    }
+}
+```
